@@ -59,12 +59,16 @@ public class App {
                 Map<String, Card> allCards = cardCollection.showAllCards();
                 allCards.forEach((name, card) -> System.out.println("Nombre: " + name + ", Tipo: " + card.getType()));
             } else if (operation.equals("6")) {
+                long startTime = System.nanoTime();
                 Map<String, Card> allCards = cardCollection.showAllCards();
                 Map<String, List<Map.Entry<String, Card>>> sortedByType = allCards.entrySet().stream()
                         .sorted(Map.Entry.comparingByKey())
                         .collect(Collectors.groupingBy(e -> e.getValue().getType(),
                                 LinkedHashMap::new, Collectors.toList()));
                 System.out.println(sortedByType);
+                long endTime = System.nanoTime();
+                long duration = (endTime - startTime);  // Duración en nanosegundos
+                System.out.println("Tiempo de ejecución: " + duration + " nanosegundos");
             } else if (operation.equals("7")) {
                 break;
             } else {
